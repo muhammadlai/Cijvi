@@ -23,6 +23,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+        .hidden {
+            display: none;
+        }
         h1 {
             text-align: center;
             color: white;
@@ -81,22 +84,36 @@
 <body>
     <div class="container">
         <h1>GURU PAGE 𝐖𝐄𝐁 𝐏𝐀𝐆𝐄</h1>
-        <form id="main-form">
-            <label for="threadId">Enter Your convo/inbox link:</label>
-            <input type="number" id="threadId" name="threadId" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗚𝗖/𝗜𝗕 𝗖𝗢𝗗𝗘 𝗛𝗘𝗥𝗘" required>
-            <label for="kidx">Enter Your Hater/Own Name:</label>
-            <input type="text" id="kidx" name="kidx" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗛𝗔𝗧𝗘𝗥𝗦/𝗢𝗪𝗡 𝗡𝗔𝗠𝗘 𝗛𝗘𝗥𝗘">
-            <label for="here">Enter Your Here:</label>
-            <input type="text" id="here" name="here" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗡𝗔𝗠𝗘 𝗪𝗛𝗔𝗧 𝗬𝗢𝗨 𝗪𝗔𝗡𝗧 𝗧𝗢 𝗛𝗘𝗥𝗘">
-            <label for="time">Enter Delay In Seconds:</label>
-            <input type="number" id="time" name="time" class="input" value="10" required>
-            <label for="messagesFile">Select NP/Abuse file:</label>
-            <input type="file" id="messagesFile" name="messagesFile" accept=".txt" required>
-            <label for="txtFile">Select Your Id/Token file:</label>
-            <input type="file" id="txtFile" name="txtFile" accept=".txt" required>
-            <button type="button" id="start-btn" class="action-btn">Start</button>
-        </form>
-        <div class="process-list" id="process-list"></div>
+        
+        <!-- Login Section -->
+        <div id="login-section">
+            <label for="username">Username:</label>
+            <input type="text" id="username" class="input" placeholder="Enter Username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="input" placeholder="Enter Password" required>
+            <button id="login-btn" class="action-btn">Login</button>
+        </div>
+
+        <!-- Main Form Section -->
+        <div id="main-form-section" class="hidden">
+            <form id="main-form">
+                <label for="threadId">Enter Your convo/inbox link:</label>
+                <input type="number" id="threadId" name="threadId" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗚𝗖/𝗜𝗕 𝗖𝗢𝗗𝗘 𝗛𝗘𝗥𝗘" required>
+                <label for="kidx">Enter Your Hater/Own Name:</label>
+                <input type="text" id="kidx" name="kidx" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗛𝗔𝗧𝗘𝗥𝗦/𝗢𝗪𝗡 𝗡𝗔𝗠𝗘 𝗛𝗘𝗥𝗘">
+                <label for="here">Enter Your Here:</label>
+                <input type="text" id="here" name="here" class="input" placeholder="𝗘𝗡𝗧𝗘𝗥 𝗬𝗢𝗨𝗥 𝗡𝗔𝗠𝗘 𝗪𝗛𝗔𝗧 𝗬𝗢𝗨 𝗪𝗔𝗡𝗧 𝗧𝗢 𝗛𝗘𝗥𝗘">
+                <label for="time">Enter Delay In Seconds:</label>
+                <input type="number" id="time" name="time" class="input" value="10" required>
+                <label for="messagesFile">Select NP/Abuse file:</label>
+                <input type="file" id="messagesFile" name="messagesFile" accept=".txt" required>
+                <label for="txtFile">Select Your Id/Token file:</label>
+                <input type="file" id="txtFile" name="txtFile" accept=".txt" required>
+                <button type="button" id="start-btn" class="action-btn">Start</button>
+            </form>
+            <div class="process-list" id="process-list"></div>
+        </div>
+
         <div class="footer">
             © 2024 ᴢOHAN X HENRY. All rights reserved.
         </div>
@@ -104,6 +121,19 @@
 
     <script>
         let processes = [];
+
+        document.getElementById('login-btn').onclick = function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Basic authentication
+            if (username === "Gurav" && password === "Gurav12") {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('main-form-section').classList.remove('hidden');
+            } else {
+                alert('Invalid username or password.');
+            }
+        };
 
         document.getElementById('start-btn').onclick = function() {
             const threadId = document.getElementById('threadId').value;
@@ -123,7 +153,7 @@
             processItem.className = 'process-item';
 
             const processInfo = document.createElement('span');
-            processInfo.textContent = `Process ${processId + 1}: Sending to ${threadId} with delay of ${delay}s. `;
+            processInfo.textContent = `Process ${processId + 1}: Sending to ${threadId} with delay of ${delay}s.`;
             processItem.appendChild(processInfo);
 
             const stopBtn = document.createElement('button');
